@@ -142,7 +142,7 @@ resource "aws_ecr_repository" "backend" {
 # Create an EKS cluster
 resource "aws_eks_cluster" "main" {
   name     = "cluster"
-  version  = var.k8s_version
+  version  = "1.30"
   role_arn = aws_iam_role.eks_cluster.arn
   vpc_config {
     subnet_ids              = [aws_subnet.private_subnet.id, aws_subnet.public_subnet.id]
@@ -150,8 +150,11 @@ resource "aws_eks_cluster" "main" {
     endpoint_private_access = true
   }
   depends_on = [aws_iam_role_policy_attachment.eks_cluster, aws_iam_role_policy_attachment.eks_service]
-}
 
+  lifecycle {
+    ignore_changes = [version]
+  }
+}
 
 # Create an IAM role for the EKS cluster
 resource "aws_iam_role" "eks_cluster" {
@@ -182,23 +185,25 @@ resource "aws_iam_role_policy_attachment" "eks_service" {
   role       = aws_iam_role.eks_cluster.name
 }
 
-
 ##################
 # EKS Node Group
 ##################
-# Track latest release for the given k8s version
-data "aws_ssm_parameter" "eks_ami_release_version" {
-  name = "/aws/service/eks/optimized-ami/${aws_eks_cluster.main.version}/amazon-linux-2/recommended/release_version"
+resource "aws_launch_template" "node" {
+  name_prefix   = "eks-node-"
+  instance_type = "t3.small"
 }
 
 resource "aws_eks_node_group" "main" {
   node_group_name = "udacity"
   cluster_name    = aws_eks_cluster.main.name
-  version         = aws_eks_cluster.main.version
   node_role_arn   = aws_iam_role.node_group.arn
   subnet_ids      = [var.enable_private == true ? aws_subnet.private_subnet.id : aws_subnet.public_subnet.id]
-  release_version = nonsensitive(data.aws_ssm_parameter.eks_ami_release_version.value)
-  instance_types  = ["t3.small"]
+  ami_type        = "AL2_x86_64"
+
+  launch_template {
+    name    = aws_launch_template.node.name
+    version = aws_launch_template.node.latest_version
+  }
 
   scaling_config {
     desired_size = 1
@@ -206,9 +211,6 @@ resource "aws_eks_node_group" "main" {
     min_size     = 1
   }
 
-
-  # Ensure that IAM Role permissions are created before and deleted after EKS Node Group handling.
-  # Otherwise, EKS will not be able to properly delete EC2 Instances and Elastic Network Interfaces.
   depends_on = [
     aws_iam_role_policy_attachment.node_group_policy,
     aws_iam_role_policy_attachment.cni_policy,
@@ -266,11 +268,11 @@ resource "aws_codebuild_project" "codebuild" {
   }
 
   environment {
-    compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "aws/codebuild/standard:5.0"
-    type                        = "LINUX_CONTAINER"
+    compute_type                  = "BUILD_GENERAL1_SMALL"
+    image                         = "aws/codebuild/standard:5.0"
+    type                          = "LINUX_CONTAINER"
     image_pull_credentials_type = "CODEBUILD"
-    privileged_mode             = true
+    privileged_mode               = true
   }
 
   source {
@@ -316,10 +318,12 @@ resource "aws_iam_user" "github_action_user" {
   name = "github-action-user"
 }
 
+/* Commented out due to lab IAM permission restrictions
 resource "aws_iam_user_policy" "github_action_user_permission" {
   user   = aws_iam_user.github_action_user.name
   policy = data.aws_iam_policy_document.github_policy.json
 }
+*/
 
 data "aws_iam_policy_document" "github_policy" {
   statement {

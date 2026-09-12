@@ -1,0 +1,216 @@
+nohup: ignoring input
+[0m[1mdata.aws_iam_policy_document.github_policy: Reading...[0m[0m
+[0m[1mdata.aws_iam_policy_document.github_policy: Read complete after 0s [id=1626969440][0m
+[0m[1maws_vpc.vpc: Refreshing state... [id=vpc-0de8c1e48ef90f03f][0m
+[0m[1mdata.aws_iam_policy_document.assume_role_policy: Reading...[0m[0m
+[0m[1mdata.aws_iam_policy_document.assume_role_policy: Read complete after 0s [id=1903849331][0m
+[0m[1maws_subnet.public_subnet: Refreshing state... [id=subnet-0bcc0533d94e0c0e4][0m
+[0m[1maws_internet_gateway.igw: Refreshing state... [id=igw-0d7f850fa6c833139][0m
+
+Terraform used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  [31m-[0m destroy
+[0m
+Terraform will perform the following actions:
+
+[1m  # aws_internet_gateway.igw[0m will be [1m[31mdestroyed[0m[0m
+[0m  [31m-[0m[0m resource "aws_internet_gateway" "igw" {
+      [31m-[0m [0m[1m[0marn[0m[0m      = "arn:aws:ec2:us-east-1:063446971241:internet-gateway/igw-0d7f850fa6c833139" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mid[0m[0m       = "igw-0d7f850fa6c833139" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mowner_id[0m[0m = "063446971241" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mtags[0m[0m     = {} [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mtags_all[0m[0m = {} [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mvpc_id[0m[0m   = "vpc-0de8c1e48ef90f03f" [90m->[0m [0m[90mnull[0m[0m
+    }
+
+[1m  # aws_subnet.public_subnet[0m will be [1m[31mdestroyed[0m[0m
+[0m  [31m-[0m[0m resource "aws_subnet" "public_subnet" {
+      [31m-[0m [0m[1m[0marn[0m[0m                                            = "arn:aws:ec2:us-east-1:063446971241:subnet/subnet-0bcc0533d94e0c0e4" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0massign_ipv6_address_on_creation[0m[0m                = false [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mavailability_zone[0m[0m                              = "us-east-1a" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mavailability_zone_id[0m[0m                           = "use1-az2" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mcidr_block[0m[0m                                     = "10.0.1.0/24" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0menable_dns64[0m[0m                                   = false [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0menable_resource_name_dns_a_record_on_launch[0m[0m    = false [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0menable_resource_name_dns_aaaa_record_on_launch[0m[0m = false [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mid[0m[0m                                             = "subnet-0bcc0533d94e0c0e4" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mipv6_native[0m[0m                                    = false [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mmap_customer_owned_ip_on_launch[0m[0m                = false [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mmap_public_ip_on_launch[0m[0m                        = true [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mowner_id[0m[0m                                       = "063446971241" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mprivate_dns_hostname_type_on_launch[0m[0m            = "ip-name" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mtags[0m[0m                                           = {
+          [31m-[0m [0m"Name" = "udacity-public"
+        } [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mtags_all[0m[0m                                       = {
+          [31m-[0m [0m"Name" = "udacity-public"
+        } [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mvpc_id[0m[0m                                         = "vpc-0de8c1e48ef90f03f" [90m->[0m [0m[90mnull[0m[0m
+    }
+
+[1m  # aws_vpc.vpc[0m will be [1m[31mdestroyed[0m[0m
+[0m  [31m-[0m[0m resource "aws_vpc" "vpc" {
+      [31m-[0m [0m[1m[0marn[0m[0m                                  = "arn:aws:ec2:us-east-1:063446971241:vpc/vpc-0de8c1e48ef90f03f" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0massign_generated_ipv6_cidr_block[0m[0m     = false [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mcidr_block[0m[0m                           = "10.0.0.0/16" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdefault_network_acl_id[0m[0m               = "acl-0d54e72198cbcb188" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdefault_route_table_id[0m[0m               = "rtb-01af0cc96f0c208ab" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdefault_security_group_id[0m[0m            = "sg-0a81a863af0fd51a0" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mdhcp_options_id[0m[0m                      = "dopt-0a798eabf43ea8210" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0menable_classiclink[0m[0m                   = false [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0menable_classiclink_dns_support[0m[0m       = false [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0menable_dns_hostnames[0m[0m                 = true [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0menable_dns_support[0m[0m                   = true [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0menable_network_address_usage_metrics[0m[0m = false [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mid[0m[0m                                   = "vpc-0de8c1e48ef90f03f" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0minstance_tenancy[0m[0m                     = "default" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mipv6_netmask_length[0m[0m                  = 0 [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mmain_route_table_id[0m[0m                  = "rtb-01af0cc96f0c208ab" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mowner_id[0m[0m                             = "063446971241" [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mtags[0m[0m                                 = {
+          [31m-[0m [0m"Name" = "udacity"
+        } [90m->[0m [0m[90mnull[0m[0m
+      [31m-[0m [0m[1m[0mtags_all[0m[0m                             = {
+          [31m-[0m [0m"Name" = "udacity"
+        } [90m->[0m [0m[90mnull[0m[0m
+    }
+
+[0m[1mPlan:[0m 0 to add, 0 to change, 3 to destroy.
+[0m[0m
+[1mChanges to Outputs:[0m[0m
+  [31m-[0m [0m[1m[0mcluster_name[0m[0m    = "cluster" [90m->[0m [0m[90mnull[0m[0m
+  [31m-[0m [0m[1m[0mcluster_version[0m[0m = "1.30" [90m->[0m [0m[90mnull[0m[0m
+[0m[1maws_internet_gateway.igw: Destroying... [id=igw-0d7f850fa6c833139][0m[0m
+[0m[1maws_subnet.public_subnet: Destroying... [id=subnet-0bcc0533d94e0c0e4][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 10s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 10s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 20s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 20s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 30s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 30s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 40s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 40s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 50s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 50s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 1m0s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 1m0s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 1m10s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 1m10s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 1m20s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 1m20s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 1m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 1m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 1m40s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 1m40s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 1m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 1m50s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 2m0s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 2m0s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 2m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 2m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 2m20s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 2m20s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 2m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 2m30s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 2m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 2m40s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 2m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 2m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 3m0s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 3m0s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 3m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 3m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 3m20s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 3m20s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 3m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 3m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 3m40s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 3m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 3m50s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 3m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 4m0s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 4m0s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 4m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 4m10s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 4m20s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 4m20s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 4m30s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 4m30s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 4m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 4m40s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 4m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 4m50s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 5m0s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 5m0s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 5m10s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 5m10s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 5m20s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 5m20s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 5m30s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 5m30s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 5m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 5m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 5m50s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 5m50s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 6m0s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 6m0s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 6m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 6m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 6m20s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 6m20s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 6m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 6m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 6m40s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 6m40s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 6m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 6m50s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 7m0s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 7m0s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 7m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 7m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 7m20s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 7m20s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 7m30s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 7m30s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 7m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 7m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 7m50s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 7m50s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 8m0s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 8m0s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 8m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 8m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 8m20s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 8m20s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 8m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 8m30s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 8m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 8m40s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 8m50s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 8m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 9m0s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 9m0s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 9m10s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 9m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 9m20s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 9m20s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 9m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 9m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 9m40s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 9m40s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 9m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 9m50s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 10m0s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 10m0s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 10m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 10m10s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 10m20s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 10m20s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 10m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 10m30s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 10m40s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 10m40s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 10m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 10m50s elapsed][0m[0m
+[0m[1maws_internet_gateway.igw: Still destroying... [id=igw-0d7f850fa6c833139, 11m0s elapsed][0m[0m
+[0m[1maws_subnet.public_subnet: Still destroying... [id=subnet-0bcc0533d94e0c0e4, 11m0s elapsed][0m[0m

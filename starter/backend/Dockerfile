@@ -3,8 +3,10 @@ ENV FLASK_RUN_HOST=0.0.0.0
 
 WORKDIR /
 RUN adduser -u 1000 -D app
+
+# Install build dependencies and native uwsgi/pcre packages via apk to avoid compilation errors
 RUN apk update && \
-  apk add \
+  apk add --no-cache \
   pcre \
   pcre-dev \
   build-base \
@@ -12,13 +14,17 @@ RUN apk update && \
   linux-headers \
   openssl \
   libffi-dev \
-  && pip install pipenv
+  uwsgi \
+  uwsgi-python3 \
+  && pip install --no-cache-dir --upgrade pip pipenv
 
 RUN mkdir -p /var/www/app && mkdir /app
 
-COPY Pipfile* /app
-RUN cd /app && pipenv install --system --deploy
+# Copy Pipfiles and install remaining python packages
+COPY Pipfile* /app/
+RUN cd /app && pipenv install --system --deploy --skip-lock || pipenv install --system --skip-lock
 
 COPY . /app
 
-CMD uwsgi --http :5000 --master --enable-threads -s /var/www/app/app.sock --manage-script-name --mount /=app:app
+WORKDIR /app
+CMD ["uwsgi", "--http", ":5000", "--master", "--enable-threads", "-s", "/var/www/app/app.sock", "--manage-script-name", "--mount", "/=movies.app:app"]
