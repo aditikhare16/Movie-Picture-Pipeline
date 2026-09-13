@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -17,12 +17,36 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Run linting and tests
+      - name: Install dependencies and Lint
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipenv
+          cd starter/backend && pipenv install --dev
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies and Test
         run: |
           python -m pip install --upgrade pip
           pip install pipenv
           cd starter/backend && pipenv install --dev
           pipenv run python -m unittest discover
+
+  deploy:
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
