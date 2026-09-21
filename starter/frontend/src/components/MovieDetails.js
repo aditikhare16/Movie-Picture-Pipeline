@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-function MovieDetail({ movie }) {
+function MovieDetails({ movie }) {
   const [details, setDetails] = useState(null);
 
   useEffect(() => {
@@ -20,8 +20,8 @@ function MovieDetail({ movie }) {
   );
 }
 
-MovieDetail.propTypes = {
+MovieDetails.propTypes = {
   movie: PropTypes.object,
 };
 
-export default MovieDetail;
+export default MovieDetails;
