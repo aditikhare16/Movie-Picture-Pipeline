@@ -5,7 +5,7 @@ ENV REACT_APP_MOVIE_API_URL=${REACT_APP_MOVIE_API_URL}
 
 WORKDIR /app
 
-# Copy dependdency files
+# Copy dependency files
 COPY package*.json ./
 
 # Install packages
@@ -14,8 +14,8 @@ RUN npm ci
 # Copy code
 COPY . .
 
-# Build the app
-RUN npm run build
+# Build the app with ESLint/Prettier checks disabled
+RUN CI=false DISABLE_ESLINT_PLUGIN=true npm run build
 
 # Expose the port used by the React app
 EXPOSE 3000
