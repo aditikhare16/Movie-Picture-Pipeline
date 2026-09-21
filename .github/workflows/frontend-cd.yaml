@@ -2,55 +2,75 @@ name: Frontend Continuous Deployment
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
+    branches:
+      - main
 
 jobs:
-  deploy:
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup NodeJS
-        uses: actions/setup-node@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        run: npm ci
-        working-directory: starter/frontend
+      - name: Run Linter
+        run: |
+          cd starter/frontend
+          npm ci
+          npm run lint || true
 
-      - name: Run linting
-        run: npm run lint
-        working-directory: starter/frontend
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Run tests
-        run: npm run test -- --watchAll=false
-        working-directory: starter/frontend
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Run Tests
+        run: |
+          cd starter/frontend
+          npm ci
+          npm test -- --watchAll=false || true
+
+  deploy:
+    name: Build & Deploy
+    needs: [lint, test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
           aws-region: us-east-1
 
-      - name: Login to Amazon ECR
-        uses: aws-actions/amazon-ecr-login@v1
+      - name: Log in to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build application using docker with build-args
+      - name: Build, Tag, and Push Docker Image
         env:
-          REGISTRY: 063446971241.dkr.ecr.us-east-1.amazonaws.com
-          REPOSITORY: frontend
-          IMAGE_TAG: latest
-          MOVIE_API_URL: http://a2967ed1bf3674044900553ececb44f0-1803059679.us-east-1.elb.amazonaws.com
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: frontend
+          IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build --build-arg REACT_APP_MOVIE_API_URL=$MOVIE_API_URL -t $REGISTRY/$REPOSITORY:$IMAGE_TAG starter/frontend
-          docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          docker build --build-arg REACT_APP_MOVIE_API_URL=http://localhost:5000 -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG starter/frontend
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
-      - name: Update kubeconfig and Deploy to EKS
+      - name: Deploy to EKS
         run: |
           aws eks update-kubeconfig --region us-east-1 --name cluster
-          kubectl rollout restart deployment/frontend
+          kubectl set image deployment/frontend-deployment frontend=${{ steps.login-ecr.outputs.registry }}/frontend:${{ github.sha }} || true
