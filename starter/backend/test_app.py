@@ -1,4 +1,4 @@
-from movies import app
+from movies.app import app
 import os
 
 
