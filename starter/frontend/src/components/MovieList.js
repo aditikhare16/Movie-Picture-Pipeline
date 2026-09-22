@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-
 const API_URL = process.env.REACT_APP_MOVIE_API_URL;
 
 function MovieList({ onMovieClick }) {
@@ -30,3 +29,4 @@ MovieList.propTypes = {
 };
 
 export default MovieList;
+
