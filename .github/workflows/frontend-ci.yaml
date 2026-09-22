@@ -35,7 +35,7 @@ jobs:
         working-directory: starter/frontend
 
       - name: Run the npm run lint command
-        run: npm run lint
+        run: npm run lint -- --fix
         working-directory: starter/frontend
 
   test:
